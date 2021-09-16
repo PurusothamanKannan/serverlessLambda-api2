@@ -1,0 +1,24 @@
+service: serverlessLamda-api2
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+ 
+
+functions:
+  hello:
+    handler: handler.curdOps
+    events:
+      - httpApi:
+          path: /items
+          method: get
+      - http:
+          path: /items
+          method: put
+      - http:
+          path: /items/{id}
+          method: delete
+      - http:
+          path: /items
+          method: post
