@@ -4,14 +4,22 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: nodejs12.x
+  iam:
+     role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 'dynamodb:*'
+          Resource:
+            -  'arn:aws:dynamodb:us-east-1:683883881884:table/*'
  
 
 functions:
   hello:
     handler: handler.curdOps
     events:
-      - httpApi:
-          path: /items
+      - http:
+          path: /items/{id}
           method: get
       - http:
           path: /items
